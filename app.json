@@ -1,33 +1,35 @@
 {
-  "name": "my-telegram-bot",
-  "description": "Telegram bot deployed on Heroku",
-  "repository": "https://github.com/BWANDARLOK/UPI",
-  "keywords": ["telegram", "bot", "pyrogram"],
-  "addons": ["heroku-postgresql"],
-  "buildpacks": [
-    {
-      "url": "heroku/python"
-    }
-  ],
-  "scripts": {
-    "start": "python main.py"
-  },
-  "env": {
-    "BOT_TOKEN": {
-      "description": "Telegram bot token"
+    "name": "my-telegram-bot",
+    "description": "Telegram bot deployed on Heroku",
+    "repository": "https://github.com/BWANDARLOK/UPI",
+    "keywords": ["telegram", "bot", "pyrogram"],
+    "addons": ["heroku-postgresql"],
+    "buildpacks": [
+        {
+            "url": "heroku/python"
+        }
+    ],
+    "scripts": {
+        "start": "python main.py"
     },
-    "CHANNEL_USERNAME": {
-      "description": "Telegram channel username"
-    }
-  },
-  "formation": {
-    "web": {
-      "quantity": 1,
-      "size": "free"
+    "env": {
+        "BOT_TOKEN": {
+            "description": "Telegram bot token"
+        },
+        "CHANNEL_USERNAME": {
+            "description": "Telegram channel username"
+        },
+        "API_ID": {
+            "description": "Telegram API ID"
+        },
+        "API_HASH": {
+            "description": "Telegram API hash"
+        }
     },
-    "worker": {
-      "quantity": 1,
-      "size": "free"
+    "formation": {
+        "worker": {
+            "quantity": 1,
+            "size": "free"
+        }
     }
-  }
 }
