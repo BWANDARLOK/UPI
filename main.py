@@ -1,9 +1,10 @@
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from config import BOT_TOKEN, CHANNEL_USERNAME
+from config import BOT_TOKEN, CHANNEL_USERNAME, API_ID, API_HASH
 
-app = Client("my_bot", bot_token=BOT_TOKEN)
+app = Client("my_bot", bot_token=BOT_TOKEN, api_id=API_ID, api_hash=API_HASH)
 
+# Handler for /start command
 @app.on_message(filters.command("start"))
 def start_command(client, message):
     keyboard = InlineKeyboardMarkup([
@@ -11,11 +12,13 @@ def start_command(client, message):
     ])
     message.reply_text("Welcome to the bot!", reply_markup=keyboard)
 
+# Handler for channel join check
 @app.on_message(filters.chat(CHANNEL_USERNAME) & filters.incoming)
 def channel_join_check(client, message):
     if message.from_user and not client.get_chat_member(CHANNEL_USERNAME, message.from_user.id).user.is_member:
         message.reply_text("Please join the channel to use this bot.")
 
+# Handler for button clicks
 @app.on_callback_query()
 def button_click(client, callback_query):
     if callback_query.data == "join_channel":
@@ -26,4 +29,3 @@ def button_click(client, callback_query):
 
 if __name__ == "__main__":
     app.run()
-                                      
