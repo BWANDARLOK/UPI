@@ -1,4 +1,33 @@
 {
-    "bot_token": "YOUR_BOT_TOKEN_HERE",
-    "channel_username": "@your_channel_username"
+  "name": "my-telegram-bot",
+  "description": "Telegram bot deployed on Heroku",
+  "repository": "https://github.com/BWANDARLOK/UPI",
+  "keywords": ["telegram", "bot", "pyrogram"],
+  "addons": ["heroku-postgresql"],
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ],
+  "scripts": {
+    "start": "python main.py"
+  },
+  "env": {
+    "BOT_TOKEN": {
+      "description": "Telegram bot token"
+    },
+    "CHANNEL_USERNAME": {
+      "description": "Telegram channel username"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "free"
+    },
+    "worker": {
+      "quantity": 1,
+      "size": "free"
+    }
+  }
 }
